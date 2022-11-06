@@ -1,0 +1,13 @@
+.link_wrapper {
+    position: relative;
+    display: flex;
+    font-size: 14px;
+    height: 15px;
+    line-height: 25px;
+    margin-bottom: 40px;
+    svg {
+        color: #64748b;
+        width: 40px;
+        height: 20px;
+    }
+}

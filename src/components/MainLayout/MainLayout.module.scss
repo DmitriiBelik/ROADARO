@@ -1,0 +1,47 @@
+.sidebar_wrapper {
+    font-weight: 500;
+    height: 95vh;
+    width: 230px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 0px 16px 16px 0px;
+
+    .sidebar_container {
+        margin: 0 auto;
+        margin-top: 30px;
+        width: 207px;
+        .person_wrapper {
+            display: flex;
+            margin-bottom: 30px;
+            div:last-child {
+                margin-left: 12px;
+            }
+            p {
+                margin: 0;
+
+                &:last-child {
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 16px;
+                    letter-spacing: 0.4px;
+                    color: #475569;
+                    mix-blend-mode: normal;
+                }
+            }
+        }
+    }
+    .opacity {
+        font-size: 14px;
+        color: #64748b;
+    }
+}
+
+.content {
+    height: 95vh;
+    width: 1330px;
+    margin-left: 260px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}

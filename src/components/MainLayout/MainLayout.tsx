@@ -1,6 +1,6 @@
 import ThemeUpdater from '../ThemeUpdater'
 import styles from './MainLayout.module.scss'
-import {Box, styled, Avatar, Divider} from '@mui/material/'
+import {Avatar, Divider} from '@mui/material/'
 import { propsLayout } from './types'
 import SideBarLink from '../SideBarLink/SideBarLink'
 import SourceIcon from '@mui/icons-material/Source';
@@ -8,15 +8,9 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import StyledBox from '../StyledBox/StyledBox'
 
 const MainLayout = ({children}: propsLayout) => {
-    const StyledBox = styled(Box)(({ theme }) => ({
-        backgroundColor: theme.palette.secondary.main,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-          width: 'auto',
-        },
-    }));
 
     function stringToColor(string: string) {
         let hash = 0;

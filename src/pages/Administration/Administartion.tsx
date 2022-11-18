@@ -1,11 +1,13 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { FC, useState } from "react"
-import StyledBox from "../StyledBox/StyledBox";
-import { options, data } from "./data";
+import StyledBox from "../../components/StyledBox/StyledBox";
+import { options, data, ChartOptions, chartData } from "./data";
 import styles from './Administration.module.scss'
 import AddIcon from '@mui/icons-material/Add';
-import InfoButton from "../InfoButton/InfoButton";
-import AdministrationTable from "../Tables/AdministrationTable/AdministrationTable";
+import InfoButton from "../../components/InfoButton/InfoButton";
+import AdministrationTable from "../../components/Tables/AdministrationTable/AdministrationTable";
+import { Bar } from 'react-chartjs-2';
+
 
 const Administartion:FC = () => {
     const [value, setValue] = useState<string | null>(options[0]);
@@ -43,6 +45,14 @@ const Administartion:FC = () => {
             </div>
             <AdministrationTable/>
             </StyledBox>
+            <div className={styles.bars_wrapper}>
+                <StyledBox className={styles.projects_bar}>
+                    <Bar options={ChartOptions} data={chartData} />
+                </StyledBox>
+                <StyledBox className={styles.projects_bar}>
+                    <Bar options={ChartOptions} data={chartData} />
+                </StyledBox>
+            </div>
         </div>
     )
 }

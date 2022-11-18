@@ -1,12 +1,12 @@
 import { Autocomplete, TextField } from "@mui/material"
 import styles from './Projects.module.scss'
-import { useState } from "react"
+import { FC, useState } from "react"
 import { data, options } from "./data";
-import StyledBox from "../StyledBox/StyledBox";
-import ProjectsTable from "../Tables/ProjectsTable/ProjectsTable";
+import StyledBox from "../../components/StyledBox/StyledBox";
+import ProjectsTable from "../../components/Tables/ProjectsTable/ProjectsTable";
 
 
-const Projects = () => {
+const Projects:FC = () => {
     const [value, setValue] = useState<string | null>(options[0]);
     const [inputValue, setInputValue] = useState('');
 

@@ -1,13 +1,13 @@
 import type { NextPage } from "next";
 import MainLayout from "../src/components/MainLayout/MainLayout";
-import Administartion from "../src/pages/Administration/Administartion";
+import Projects from "../src/pages/Projects/Projects";
 
-const Home: NextPage = () => {
+const ProjectsPage: NextPage = () => {
   return (
     <MainLayout>
-      <Administartion/>
+      <Projects/>
     </MainLayout>
   );
 };
 
-export default Home;
+export default ProjectsPage;

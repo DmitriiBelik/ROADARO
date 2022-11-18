@@ -1,5 +1,15 @@
 import { searchType } from './types'
 
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js'
+
 export const options = ['Любая', 'Сотрудник', 'Администратор']
 
 export const data: searchType[] = [
@@ -52,3 +62,39 @@ export const data: searchType[] = [
         password: '************',
     },
 ]
+
+const labels = [
+    'Тальны',
+    'Одинск',
+    'Стеклянка',
+    'Ширяева',
+    'Тайтура',
+    'Новожилкино',
+    'Архиреевка',
+]
+
+export const chartData = {
+    labels,
+    datasets: [
+        {
+            label: 'Проекты',
+            data: [1.8, 2.5, 1.5, 2.3, 3.2, 2.0, 1.2],
+            backgroundColor: '#FBBF24',
+        },
+    ],
+}
+
+export const ChartOptions = {
+    responsive: true,
+    plugins: {
+        legend: {
+            position: 'top' as const,
+        },
+        title: {
+            display: true,
+            text: 'Сравнение проектов',
+        },
+    },
+}
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)

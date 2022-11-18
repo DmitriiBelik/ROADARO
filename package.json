@@ -15,13 +15,18 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.7",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "chart.js": "^3.9.1",
     "eslint-config-prettier": "^8.5.0",
-    "next": "12.0.7",
+    "formik": "^2.2.9",
+    "formik-mui": "^5.0.0-alpha.0",
+    "next": "^12.3.3",
     "next-themes": "^0.0.15",
     "prettier": "^2.7.1",
     "react": "17.0.2",
+    "react-chartjs-2": "^4.3.1",
     "react-dom": "17.0.2",
-    "sass": "^1.56.0"
+    "sass": "^1.56.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "17.0.8",

@@ -12,7 +12,7 @@ import {
 
 export const options = ['Любая', 'Сотрудник', 'Администратор']
 
-export const data: searchType[] = [
+export const Employees: searchType[] = [
     {
         id: 1,
         name: 'Касаткина София Дмитриевна',
@@ -55,6 +55,22 @@ export const data: searchType[] = [
     },
     {
         id: 6,
+        name: 'Кулагин Степан Никитич',
+        role: 'Сотрудник',
+        position: 'Менеджер по закупкам',
+        login: 'kulsn-dsio@mail.ru',
+        password: '************',
+    },
+    {
+        id: 7,
+        name: 'Кулагин Степан Никитич',
+        role: 'Сотрудник',
+        position: 'Менеджер по закупкам',
+        login: 'kulsn-dsio@mail.ru',
+        password: '************',
+    },
+    {
+        id: 8,
         name: 'Кулагин Степан Никитич',
         role: 'Сотрудник',
         position: 'Менеджер по закупкам',

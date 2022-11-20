@@ -1,0 +1,25 @@
+.login_wrapper {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.wide_input {
+    width: 600px;
+    margin: 10px 0px;
+}
+
+.fields_wrapper {
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.registartion_block {
+    text-align: start;
+
+    a {
+        color: #fbbf24;
+    }
+}

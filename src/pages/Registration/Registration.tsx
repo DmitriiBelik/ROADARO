@@ -6,14 +6,15 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { FC } from 'react'
 import { Formik, Form, Field } from "formik";
 import { TextField, RadioGroup, CheckboxWithLabel } from 'formik-mui';
-import { initialValuesForm, SignupSchema } from './data';
+import { initialValuesForm, ValidationSchema } from './data';
 import InfoButton from '../../components/InfoButton/InfoButton';
+import Link from 'next/link';
 
 const Registration:FC = () => {
     return(
         <Formik 
             initialValues={initialValuesForm}
-            validationSchema={SignupSchema}
+            validationSchema={ValidationSchema}
             onSubmit={(values) => console.log(values)}
             enableReinitialize
         >
@@ -148,12 +149,15 @@ const Registration:FC = () => {
                                 }}
                             />
                         </div>
-                        <Field
-                            component={CheckboxWithLabel}
-                            type="checkbox"
-                            name="accept"
-                            Label={{ label: 'Я принимаю условия и соглашения' }}
-                        />
+                        <div className={styles.bottom_block}>
+                            <Field
+                                component={CheckboxWithLabel}
+                                type="checkbox"
+                                name="accept"
+                                Label={{ label: 'Я принимаю условия и соглашения' }}
+                            />
+                            <span>Уже есть аккаунт? <Link href='/signIn'>Войти</Link></span>
+                        </div>
                     </div>
                     <InfoButton type="submit" disabled={!props.values.accept} style={{marginTop:'20px'}}>Зарегистрироваться</InfoButton>
                 </div>

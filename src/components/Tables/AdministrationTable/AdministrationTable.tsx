@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import {data} from '../../../pages/Administration/data'
+import {Employees} from '../../../pages/Administration/data'
 
 interface Column {
   id: 'name' | 'role' | 'position' | 'login' | 'password';
@@ -60,7 +60,7 @@ function createData(
   return {key, name, role, position, login, password};
 }
 
-const rows:Data[] = data.map((item) => {
+const rows:Data[] = Employees.map((item) => {
     return(createData(item.id, item.name, item.role, item.position, item.login, item.password))
 })
 
@@ -80,7 +80,7 @@ export default function AdministrationTable() {
 
   return (
     <Paper sx={{ width: '100%' }}>
-      <TableContainer sx={{ maxHeight: 490 }}>
+      <TableContainer sx={{ maxHeight: 360 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

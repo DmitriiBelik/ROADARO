@@ -32,3 +32,15 @@
     text-align: start;
     margin-top: 20px;
 }
+
+.bottom_block {
+    display: flex;
+    justify-content: space-between;
+    span {
+        line-height: 38.98px;
+
+        a {
+            color: #fbbf24;
+        }
+    }
+}

@@ -1,7 +1,7 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { FC, useState } from "react"
 import StyledBox from "../../components/StyledBox/StyledBox";
-import { options, data, ChartOptions, chartData } from "./data";
+import { options, Employees, ChartOptions, chartData } from "./data";
 import styles from './Administration.module.scss'
 import AddIcon from '@mui/icons-material/Add';
 import InfoButton from "../../components/InfoButton/InfoButton";
@@ -14,34 +14,34 @@ const Administartion:FC = () => {
     const [inputValue, setInputValue] = useState('');
 
     return(
-        <div>
-            <StyledBox>
-             <div className={styles.administartion_header}>
-                <h3>Учетные записи сотрудников</h3>
+        <div style={{height:'510px'}}>
+            <StyledBox style={{height:'510px', position:'relative'}}>
+                <div className={styles.administartion_header}>
+                    <h3>Учетные записи сотрудников</h3>
                     <Autocomplete
-                    style={{marginLeft:'40px'}}
-                    value={value}
-                    onChange={(event: any, newValue: string | null) => {
-                    setValue(newValue);
-                    }}
-                    inputValue={inputValue}
-                    onInputChange={(event, newInputValue) => {
-                    setInputValue(newInputValue);
-                    }}
-                    id="controllable"
-                    options={options}
-                    sx={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Роль" />}
-                />
-                <Autocomplete
-                style={{width:'300px', marginLeft:'40px'}}
-                className={styles.search}
-                id="free-solo-demo"
-                freeSolo
-                options={data.map((option) => option.name)}
-                renderInput={(params) => <TextField {...params} label="Поиск по имени" />}
-            />
-            <InfoButton endIcon={<AddIcon />}>Добавить</InfoButton>
+                        style={{marginLeft:'40px'}}
+                        value={value}
+                        onChange={(event: any, newValue: string | null) => {
+                        setValue(newValue);
+                        }}
+                        inputValue={inputValue}
+                        onInputChange={(event, newInputValue) => {
+                        setInputValue(newInputValue);
+                        }}
+                        id="controllable"
+                        options={options}
+                        sx={{ width: 300 }}
+                        renderInput={(params) => <TextField {...params} label="Роль" />}
+                    />
+                    <Autocomplete
+                        style={{width:'300px', marginLeft:'40px'}}
+                        className={styles.search}
+                        id="free-solo-demo"
+                        freeSolo
+                        options={Employees.map((option) => option.name)}
+                        renderInput={(params) => <TextField {...params} label="Поиск по имени" />}
+                    />
+                    <InfoButton style={{marginTop:'5px'}} endIcon={<AddIcon />}>Добавить</InfoButton>
             </div>
             <AdministrationTable/>
             </StyledBox>

@@ -1,0 +1,21 @@
+.wide_input {
+    width: 600px;
+    margin: 10px 0px;
+}
+
+.fields_wrapper {
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.buttons_wrapper {
+    position: absolute;
+    bottom: 20px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}

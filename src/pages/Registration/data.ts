@@ -16,7 +16,7 @@ export const initialValuesForm: InitialValuesType = {
 const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
-export const SignupSchema = Yup.object().shape({
+export const ValidationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Обязательное поле'),
     password: Yup.string()
         .required('Обязательное поле')

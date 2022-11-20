@@ -27,6 +27,18 @@ a {
     }
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+    background: #1e293b;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #fbbf24;
+    border-radius: 50px;
+    position: relative;
+}
+
 .css-1q3trro-MuiPaper-root {
     background-color: transparent;
     background-image: none;
@@ -34,9 +46,24 @@ a {
 
 .css-1gw840t-MuiTableCell-root,
 .css-flgpn8-MuiTableCell-root {
-    background-color: inherit;
+    background-color: #334155;
+    border: #334155;
 }
 
 .css-1q3trro-MuiPaper-root {
     box-shadow: none;
+}
+
+.css-11bfvty-MuiToolbar-root-MuiTablePagination-toolbar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.sub_switch {
+    margin-top: 5px;
+}
+
+.Mui-disabled {
+    opacity: 0.5;
 }

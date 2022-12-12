@@ -1,5 +1,5 @@
 import { Autocomplete, TextField } from "@mui/material";
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import StyledBox from "../../components/StyledBox/StyledBox";
 import { options, Employees, ChartOptions, chartData } from "./data";
 import styles from './Administration.module.scss'
@@ -7,15 +7,24 @@ import AddIcon from '@mui/icons-material/Add';
 import InfoButton from "../../components/InfoButton/InfoButton";
 import AdministrationTable from "../../components/Tables/AdministrationTable/AdministrationTable";
 import { Bar } from 'react-chartjs-2';
+import Router from 'next/router';
 
 
-const Administartion:FC = () => {
+const Administartion = (currentUser:any) => {
     const [value, setValue] = useState<string | null>(options[0]);
     const [inputValue, setInputValue] = useState('');
 
+    useEffect(() => {
+        if(currentUser?.currentUser?.uid) {
+            Router.push('/')
+        } else {
+            Router.push('/signIn')
+        }
+    }, [currentUser.currentUser])
+
     return(
         <div style={{height:'510px'}}>
-            <StyledBox style={{height:'510px', position:'relative'}}>
+            <StyledBox style={{height:'675px', position:'relative'}}>
                 <div className={styles.administartion_header}>
                     <h3>Учетные записи сотрудников</h3>
                     <Autocomplete

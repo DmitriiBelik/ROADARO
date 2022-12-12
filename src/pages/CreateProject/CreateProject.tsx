@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Field, Form, Formik } from "formik"
-import { FC, useState } from "react"
+import { useEffect, useState } from "react"
 import StyledBox from "../../components/StyledBox/StyledBox"
 import { InitialValues, ValidationSchema, roadClasses, workTypes } from "./data"
 import styles from './CreateProject.module.scss'
@@ -15,9 +14,18 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { rbFilials, rbQuarrys } from "../../rb/rb"
+import Router from 'next/router';
 
-const CreateProject:FC = () => {
+const CreateProject = (currentUser:any) => {
     const [subcontractor, setSubcontractor] = useState<boolean>(false)
+
+    useEffect(() => {
+        if(currentUser.currentUser.uid) {
+            Router.push('/')
+        } else {
+            Router.push('/signIn')
+        }
+    }, [currentUser.currentUser])
 
     return(
         <Formik 

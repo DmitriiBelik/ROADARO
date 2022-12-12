@@ -80,7 +80,7 @@ export default function AdministrationTable() {
 
   return (
     <Paper sx={{ width: '100%' }}>
-      <TableContainer sx={{ maxHeight: 360 }}>
+      <TableContainer sx={{ maxHeight: 490 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

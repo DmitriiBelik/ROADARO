@@ -9,6 +9,7 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import StyledBox from '../StyledBox/StyledBox'
+import { logout } from '../../services/auth'
 
 const MainLayout = ({children}: propsLayout) => {
 
@@ -58,7 +59,7 @@ const MainLayout = ({children}: propsLayout) => {
                     <Divider/>
                     <p className={styles.opacity}>Учетная запись</p>
                     <SideBarLink icon={<SettingsIcon/>} title='Настройки'/>
-                    <SideBarLink icon={<LogoutIcon/>} title='Выйти'/>
+                    <SideBarLink onClick={()=>logout()} icon={<LogoutIcon/>} title='Выйти'/>
                     <ThemeUpdater/>
                 </nav>
             </StyledBox>

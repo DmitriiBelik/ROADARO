@@ -1,20 +1,31 @@
 import {  InputAdornment, IconButton } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email';
 import KeyIcon from '@mui/icons-material/Key';
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Formik, Form, Field } from "formik";
 import { TextField } from 'formik-mui';
 import { initialValuesForm, ValidationSchema } from './data';
 import InfoButton from '../../components/InfoButton/InfoButton';
+import { login } from '../../services/auth';
 import styles from './SignIn.module.scss'
 import Link from 'next/link';
+import Router from 'next/router';
 
-const SignIn:FC = () => {
+const SignIn = (currentUser:any) => {
+
+    useEffect(() => {
+        if(currentUser?.currentUser?.uid) {
+            Router.push('/')
+        } else {
+            Router.push('/signIn')
+        }
+    }, [currentUser.currentUser])
+
     return(
         <Formik 
             initialValues={initialValuesForm}
             validationSchema={ValidationSchema}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => login(values.email, values.password)}
             enableReinitialize
         >
             <Form>

@@ -8,14 +8,19 @@ import { Formik, Form, Field } from "formik";
 import { TextField, RadioGroup, CheckboxWithLabel } from 'formik-mui';
 import { initialValuesForm, ValidationSchema } from './data';
 import InfoButton from '../../components/InfoButton/InfoButton';
+import { register } from '../../services/auth';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
 
 const Registration:FC = () => {
+
+    const dispatch = useDispatch();
     return(
         <Formik 
             initialValues={initialValuesForm}
             validationSchema={ValidationSchema}
-            onSubmit={(values) => console.log(values)}
+            //@ts-ignore
+            onSubmit={(values) => dispatch(register(values.email, values.password))}
             enableReinitialize
         >
         {props => (

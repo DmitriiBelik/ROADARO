@@ -2,7 +2,7 @@ import styles from './SideBarLink.module.scss'
 import { SideBarLinkProps } from './types'
 import {Badge, BadgeProps, styled} from '@mui/material'
 
-const SideBarLink = ({icon, title, count}: SideBarLinkProps) => {
+const SideBarLink = ({icon, title, count, onClick}: SideBarLinkProps) => {
 
     const StyledBadge = styled(Badge)<BadgeProps>( () => ({
         '& .MuiBadge-badge': {
@@ -13,7 +13,7 @@ const SideBarLink = ({icon, title, count}: SideBarLinkProps) => {
       }));
 
     return(
-        <div className={styles.link_wrapper}>
+        <div onClick={onClick} className={styles.link_wrapper}>
             {icon}
             {count ? 
                 <StyledBadge color="warning" badgeContent={count}>

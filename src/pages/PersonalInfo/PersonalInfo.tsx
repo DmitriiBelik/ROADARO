@@ -57,7 +57,7 @@ export default function PersonalInfo(currentUser: any) {
     <Formik 
         initialValues={initialValuesForm}
         validationSchema={ValidationSchema}
-        onSubmit={(values) => handleNext()}
+        onSubmit={() => handleNext()}
         enableReinitialize
     >
         {props => (

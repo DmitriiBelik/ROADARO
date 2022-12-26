@@ -1,11 +1,10 @@
 import styles from './Registration.module.scss'
-import {  InputAdornment, IconButton, FormControlLabel, Radio, FormLabel } from '@mui/material'
+import {  InputAdornment, IconButton } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email';
 import KeyIcon from '@mui/icons-material/Key';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { FC, useEffect } from 'react'
 import { Formik, Form, Field } from "formik";
-import { TextField, RadioGroup, CheckboxWithLabel } from 'formik-mui';
+import { TextField, CheckboxWithLabel } from 'formik-mui';
 import { initialValuesForm, ValidationSchema } from './data';
 import InfoButton from '../../components/InfoButton/InfoButton';
 import { getParams, register } from '../../services/auth';

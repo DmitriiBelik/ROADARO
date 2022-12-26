@@ -1,7 +1,7 @@
 import {  InputAdornment, IconButton } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email';
 import KeyIcon from '@mui/icons-material/Key';
-import { FC, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Formik, Form, Field } from "formik";
 import { TextField } from 'formik-mui';
 import { initialValuesForm, ValidationSchema } from './data';

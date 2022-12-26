@@ -7,7 +7,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { useAppSelector } from '../../../hooks/redux';
 import { workTypes } from '../../../pages/CreateProject/data';
 import { useState } from 'react';
 

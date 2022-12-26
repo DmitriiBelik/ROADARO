@@ -23,7 +23,6 @@ import { addProject } from "../../services/projects"
 const CreateProject = () => {
     const [subcontractor, setSubcontractor] = useState<boolean>(false)
     const {userState} = useAppSelector(state => state.user)
-    const { projects } = useAppSelector(state => state.projects)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -39,7 +38,7 @@ const CreateProject = () => {
     }
 
     const getData = (values: any) => {
-        let dataObj:any = {}
+        const dataObj:any = {}
         dataObj.responsible = values.responsible
         dataObj.projectName = values.projectName
         dataObj.roadClass = values.roadClass

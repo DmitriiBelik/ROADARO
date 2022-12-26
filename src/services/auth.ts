@@ -1,8 +1,7 @@
 import {createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword} from 'firebase/auth'
 import { auth } from './firebase';
-import {getDatabase, ref, push, set, get, query, remove} from 'firebase/database'
+import {getDatabase, ref, push, set, get, query} from 'firebase/database'
 import { userParamsFetched } from '../redux/UserSlice';
-import { useDispatch } from 'react-redux';
 
 export async function register(email: string, password: string) {
     try{

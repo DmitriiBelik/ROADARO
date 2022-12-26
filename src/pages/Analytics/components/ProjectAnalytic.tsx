@@ -46,14 +46,8 @@ const ProjectAnalytic = () => {
         {props => (
         <div>
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom:'30px'}}>
-                <Autocomplete
-                    style={{marginLeft:'40px'}}
-                    className={styles.search}
-                    id="free-solo-demo"
-                    freeSolo
-                    onChange={(value) => props.setFieldValue('projectTitle', value.target.innerText)}
-                    options={projects.map((option: { projectName: string; }) => option.projectName)}
-                    renderInput={(params) => <TextField {...params} label="Название проекта" />}
+                {/*@ts-ignore*/ }
+                <Autocomplete style={{marginLeft:'40px'}} className={styles.search} id="free-solo-demo" freeSolo onChange={(value) => props.setFieldValue('projectTitle', value.target.innerText)} options={projects.map((option: { projectName: string; }) => option.projectName)} renderInput={(params) => <TextField {...params} label="Название проекта" />}
                 />
                 <Autocomplete
                     style={{marginLeft:'40px'}}

@@ -1,6 +1,5 @@
 import { Formik } from "formik"
 import StyledBox from "../../components/StyledBox/StyledBox"
-import { useAppSelector } from "../../hooks/redux"
 import SettingForm from "./SettingsForm"
 import Router from 'next/router';
 import styles from '../CreateProject/CreateProject.module.scss'
@@ -9,8 +8,6 @@ import { Button } from "@mui/material"
 import InfoButton from "../../components/InfoButton/InfoButton";
 
 const SettingsPage = () => {
-    const {userState, userParams} = useAppSelector<any>(state => state.user)
-
     return(
         <Formik 
             initialValues={{
@@ -23,7 +20,7 @@ const SettingsPage = () => {
             }}
             onSubmit={(values) => console.log(values)}
             enableReinitialize
-        >{props => (
+        >
             <StyledBox style={{height:'100%', position:'relative'}}>
                 <h3 style={{margin:'0', textAlign:'center', paddingTop:'20px'}}>Личный кабинет</h3>
                     <div style={{margin:'0 auto', width: 'fit-content'}}>
@@ -40,7 +37,6 @@ const SettingsPage = () => {
                         </div>
                     </div>
             </StyledBox>
-        )}
         </Formik>
     )
 }

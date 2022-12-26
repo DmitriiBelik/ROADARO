@@ -60,14 +60,8 @@ const Projects:FC = () => {
                 <div style={{display:'flex', justifyContent:'space-between'}}>
                     <div className={styles.projects_header}>
                         <h3>Проекты</h3>
-                        <Autocomplete
-                            style={{marginLeft:'40px'}}
-                            className={styles.search}
-                            id="free-solo-demo"
-                            freeSolo
-                            onChange={(value) => props.setFieldValue('projectTitle', value.target.innerText)}
-                            options={projects.map((option: { projectName: string; }) => option.projectName)}
-                            renderInput={(params) => <TextField {...params} label="Название проекта" />}
+                        {/*@ts-ignore*/ }
+                        <Autocomplete style={{marginLeft:'40px'}} className={styles.search} id="free-solo-demo" freeSolo onChange={(value) => props.setFieldValue('projectTitle', value.target.innerText)} options={projects.map((option: { projectName: string; }) => option.projectName)} renderInput={(params) => <TextField {...params} label="Название проекта" />}
                         />
                         <Autocomplete
                             style={{marginLeft:'40px'}}

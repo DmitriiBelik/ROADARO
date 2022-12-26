@@ -5,7 +5,6 @@ import { userFetched } from "../src/redux/UserSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { auth } from "../src/services/firebase";
-import { useAppSelector } from "../src/hooks/redux";
 
 const SignInPage: NextPage = () => {
 

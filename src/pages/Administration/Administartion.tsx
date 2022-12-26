@@ -1,5 +1,5 @@
 import { Autocomplete, TextField } from "@mui/material";
-import { FC, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import StyledBox from "../../components/StyledBox/StyledBox";
 import { options, Employees, ChartOptions, chartData } from "./data";
 import styles from './Administration.module.scss'

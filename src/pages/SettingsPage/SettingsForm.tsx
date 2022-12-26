@@ -9,7 +9,7 @@ import { useAppSelector } from "../../hooks/redux";
 import { useEffect } from "react";
 
 const SettingForm = () => {
-    const {values, setFieldValue} = useFormikContext()
+    const {setFieldValue} = useFormikContext()
     const {userState, userParams} = useAppSelector<any>(state => state.user)
 
     useEffect(() => {

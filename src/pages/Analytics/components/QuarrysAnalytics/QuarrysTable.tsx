@@ -7,12 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { useAppSelector } from '../../../hooks/redux';
-import { workTypes } from '../../../pages/CreateProject/data';
-import { useState } from 'react';
 
 interface Column {
-  id: 'name' | 'type' | 'start' | 'end' | 'mark' | 'reviews';
+  id: 'name' | 'volume' | 'extractedVolume';
   label: string;
   minWidth?: number;
   align?: 'right';
@@ -20,73 +17,45 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'name', label: 'Наименование', minWidth: 170 },
-  { id: 'type', label: 'Тип работ', minWidth: 100 },
+  { id: 'name', label: 'Наименование карьера', minWidth: 170 },
   {
-    id: 'start',
-    label: 'Дата начала',
+    id: 'volume',
+    label: 'Объем карьера',
     minWidth: 170,
     align: 'right',
-    format: (value: number) => value.toLocaleString('en-US'),
   },
   {
-    id: 'end',
-    label: 'Дата конца',
-    minWidth: 170,
+    id: 'extractedVolume',
+    label: 'Добытый объем',
     align: 'right',
-    format: (value: number) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'mark',
-    label: 'Оценка',
-    minWidth: 170,
-    align: 'right',
-    format: (value: number) => value.toFixed(2),
-  },
-  {
-    id: 'reviews',
-    label: 'Отзывы',
-    minWidth: 170,
-    align: 'right',
-    format: (value: number) => value.toFixed(0),
-  },
+  }
 ];
 
-interface Data {
+export interface Data {
   key: number;
   name: string;
-  type: string;
-  start: string;
-  end: string;
-  mark: number;
-  reviews: number;
+  volume: number;
+  extractedVolume: number,
 }
 
 function createData(
-  key: number,
-  name: string,
-  type: string,
-  start: string,
-  end: string,
-  mark: number,
-  reviews: number
+    key: number,
+    name: string,
+    volume: number,
+    extractedVolume: number,
 ): Data {
-  return {key, name, type, start, end, mark, reviews };
+  return {key, name, volume, extractedVolume};
 }
 
 
-export default function ProjectsTable({tableData}:any) {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+export default function QuarrysTable({data}:any) {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const getParambyNumber = (param: number, instance: any) => {
-    return instance.find((value:any) => value.id == param).title
-  }
+  const rows:Data[] = data.map((item:any) => {
+    return(createData(item.id, item.title, item.volume, item.extractedVolume))
+})
 
-  const getRows = () => {
-    return tableData.map((proj:any, index:any) =>  createData(index, proj.projectName, getParambyNumber(proj.workType, workTypes), proj.dateStart, proj.dateEnd, proj.mark, proj.reviews))
-  }
-  
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -98,7 +67,7 @@ export default function ProjectsTable({tableData}:any) {
 
   return (
     <Paper sx={{ width: '100%' }}>
-      <TableContainer>
+      <TableContainer sx={{ maxHeight: 490 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -114,9 +83,9 @@ export default function ProjectsTable({tableData}:any) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {getRows()
+            {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row:any) => {
+              .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.key}>
                     {columns.map((column) => {
@@ -138,7 +107,7 @@ export default function ProjectsTable({tableData}:any) {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={getRows().length}
+        count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

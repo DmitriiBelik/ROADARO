@@ -3,24 +3,41 @@ import {  InputAdornment, IconButton, FormControlLabel, Radio, FormLabel } from 
 import EmailIcon from '@mui/icons-material/Email';
 import KeyIcon from '@mui/icons-material/Key';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Formik, Form, Field } from "formik";
 import { TextField, RadioGroup, CheckboxWithLabel } from 'formik-mui';
 import { initialValuesForm, ValidationSchema } from './data';
 import InfoButton from '../../components/InfoButton/InfoButton';
-import { register } from '../../services/auth';
+import { getParams, register } from '../../services/auth';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../hooks/redux';
+import Router from 'next/router';
 
 const Registration:FC = () => {
 
     const dispatch = useDispatch();
+
+    const registrationAccept = (values: any) => {
+        //@ts-ignore
+        dispatch(register(values.email, values.password))
+    }
+
+    const {userState} = useAppSelector(state => state.user)
+
+    useEffect(() => {
+        if(userState){
+            getParams(userState, dispatch)
+            Router.push('/') 
+        }
+    }, [userState])
+
     return(
         <Formik 
             initialValues={initialValuesForm}
             validationSchema={ValidationSchema}
             //@ts-ignore
-            onSubmit={(values) => dispatch(register(values.email, values.password))}
+            onSubmit={(values) => registrationAccept(values)}
             enableReinitialize
         >
         {props => (
@@ -75,7 +92,7 @@ const Registration:FC = () => {
                             ),
                         }}
                     />
-                     <Field
+                    <Field
                         className={styles.wide_input}
                         component={TextField}
                         size='small'
@@ -93,67 +110,6 @@ const Registration:FC = () => {
                             ),
                         }}
                     />
-                    <div className={styles.line_input_wrapper}>
-                        <Field
-                            component={TextField}
-                            size='small'
-                            name="lastName"
-                            type="text"
-                            label="Фамилия"
-                            variant="outlined"
-                        />
-                        <Field
-                            component={TextField}
-                            size='small'
-                            name="firstName"
-                            type="text"
-                            label="Имя"
-                            variant="outlined"
-                        />
-                        <Field
-                            component={TextField}
-                            size='small'
-                            name="patrName"
-                            type="text"
-                            label="Отчество"
-                            variant="outlined"
-                        />
-                    </div>
-                        <div className={styles.line_input_wrapper_radio}>
-                            <div>
-                                <FormLabel 
-                                id="radio-buttons-group-label">Укажите ваш пол</FormLabel>
-                                    <Field row component={RadioGroup} name="sex">
-                                        <FormControlLabel
-                                            value="male"
-                                            control={<Radio/>}
-                                            label="Мужчина"
-                                        />
-                                        <FormControlLabel
-                                            value="female"
-                                            control={<Radio/>}
-                                            label="Женщина"
-                                        />
-                                    </Field>
-                            </div>
-                            <Field
-                                component={TextField}
-                                size='small'
-                                name="phone"
-                                type="text"
-                                label="Номер телефона"
-                                variant="outlined"
-                                InputProps={{
-                                    startAdornment: (
-                                    <InputAdornment position="start">
-                                        <IconButton edge="start">
-                                            <LocalPhoneIcon/>
-                                        </IconButton>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        </div>
                         <div className={styles.bottom_block}>
                             <Field
                                 component={CheckboxWithLabel}
@@ -163,13 +119,12 @@ const Registration:FC = () => {
                             />
                             <span>Уже есть аккаунт? <Link href='/signIn'>Войти</Link></span>
                         </div>
-                    </div>
-                    <InfoButton type="submit" disabled={!props.values.accept} style={{marginTop:'20px'}}>Зарегистрироваться</InfoButton>
                 </div>
-            </Form>
-         )}
-        </Formik>
-    )
-}
+                <InfoButton type="submit" disabled={!props.values.accept} style={{marginTop:'20px'}}>Зарегистрироваться</InfoButton>
+            </div>
+        </Form>
+        )}
+    </Formik>
+)}
 
 export default Registration

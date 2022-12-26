@@ -10,7 +10,6 @@ import { auth } from "../src/services/firebase";
 
 const CreateProjectPage: NextPage = () => {
 
-  const {userState} = useAppSelector(state => state.user)
     const dispatch = useDispatch();
   
     const authStateChanged = (user: any) => {
@@ -23,7 +22,7 @@ const CreateProjectPage: NextPage = () => {
 
   return (
     <MainLayout>
-        <CreateProject currentUser={userState}/>
+        <CreateProject/>
     </MainLayout>
   );
 };

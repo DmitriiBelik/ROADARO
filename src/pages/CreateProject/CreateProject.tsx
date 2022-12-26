@@ -15,17 +15,43 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { rbFilials, rbQuarrys } from "../../rb/rb"
 import Router from 'next/router';
+import { useAppSelector } from "../../hooks/redux"
+import { getParams } from "../../services/auth"
+import { useDispatch } from "react-redux"
+import { addProject } from "../../services/projects"
 
-const CreateProject = (currentUser:any) => {
+const CreateProject = () => {
     const [subcontractor, setSubcontractor] = useState<boolean>(false)
+    const {userState} = useAppSelector(state => state.user)
+    const { projects } = useAppSelector(state => state.projects)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if(currentUser.currentUser.uid) {
-            Router.push('/')
-        } else {
-            Router.push('/signIn')
-        }
-    }, [currentUser.currentUser])
+        userState ? Router.push('/createProject') :  Router.push('/signIn')
+    }, [userState])
+
+    useEffect(() => {
+        getParams(userState, dispatch)
+    }, [userState])
+
+    const getStringDate = (value: any) => {
+        return String(value['$D']) + '.' + String(value['$M']+1) + '.' + String(value['$y'])
+    }
+
+    const getData = (values: any) => {
+        let dataObj:any = {}
+        dataObj.responsible = values.responsible
+        dataObj.projectName = values.projectName
+        dataObj.roadClass = values.roadClass
+        dataObj.workType = values.workType
+        dataObj.filial = values.filial
+        dataObj.roadLength =  values.roadLength
+        dataObj.quarry = values.quarry
+        dataObj.dateStart = getStringDate(values.dateStart)
+        dataObj.dateEnd = getStringDate(values.dateEnd)
+        dataObj.subcontractor = values.subcontractor
+        return dataObj
+    }
 
     return(
         <Formik 
@@ -249,7 +275,7 @@ const CreateProject = (currentUser:any) => {
                             <Grid item xs={6}>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
-                                        onChange={(value) => props.setFieldValue("dateStart", value, true)}
+                                        onChange={(value) => props.setFieldValue("dateStart", value)}
                                         value={props.values.dateStart}
                                         label="Дата начала работ"
                                         renderInput={(params) => (
@@ -269,7 +295,7 @@ const CreateProject = (currentUser:any) => {
                             <Grid item xs={6}>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
-                                        onChange={(value) => props.setFieldValue("dateEnd", value, true)}
+                                        onChange={(value) => props.setFieldValue("dateEnd", value)}
                                         value={props.values.dateEnd}
                                         label="Дата окончания работ"
                                         renderInput={(params) => (
@@ -286,11 +312,18 @@ const CreateProject = (currentUser:any) => {
                                     />
                                 </LocalizationProvider>
                             </Grid>
+                            <div className={styles.buttons_wrapper}>
+                                <Button onClick={() => Router.push('/projects')} variant="contained">Отменить</Button>
+                                <InfoButton 
+                                    onClick={() => {
+                                        addProject(getData(props.values));
+                                        Router.push('/projects')
+                                        }
+                                    }>
+                                    Сохранить
+                                </InfoButton>
+                            </div>
                         </Grid>
-                        <div className={styles.buttons_wrapper}>
-                            <Button variant="contained">Отменить</Button>
-                            <InfoButton>Сохранить</InfoButton>
-                        </div>
                     </div>
                 </Form>
             </StyledBox>

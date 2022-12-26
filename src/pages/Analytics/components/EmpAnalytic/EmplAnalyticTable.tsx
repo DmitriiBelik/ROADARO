@@ -7,12 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { useAppSelector } from '../../../hooks/redux';
-import { workTypes } from '../../../pages/CreateProject/data';
-import { useState } from 'react';
 
 interface Column {
-  id: 'name' | 'type' | 'start' | 'end' | 'mark' | 'reviews';
+  id: 'name' | 'position' | 'filial' | 'hireDate' | 'rating' | 'reviews';
   label: string;
   minWidth?: number;
   align?: 'right';
@@ -20,73 +17,66 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'name', label: 'Наименование', minWidth: 170 },
-  { id: 'type', label: 'Тип работ', minWidth: 100 },
+  { id: 'name', label: 'Имя сотрудника', minWidth: 170 },
   {
-    id: 'start',
-    label: 'Дата начала',
+    id: 'position',
+    label: 'Должность',
     minWidth: 170,
     align: 'right',
-    format: (value: number) => value.toLocaleString('en-US'),
   },
   {
-    id: 'end',
-    label: 'Дата конца',
-    minWidth: 170,
+    id: 'filial',
+    label: 'Филиал',
     align: 'right',
-    format: (value: number) => value.toLocaleString('en-US'),
   },
   {
-    id: 'mark',
-    label: 'Оценка',
-    minWidth: 170,
+    id: 'hireDate',
+    label: 'Дата найма',
     align: 'right',
-    format: (value: number) => value.toFixed(2),
+  },
+  {
+    id: 'rating',
+    label: 'Рейтинг работ',
+    align: 'right',
   },
   {
     id: 'reviews',
     label: 'Отзывы',
-    minWidth: 170,
     align: 'right',
-    format: (value: number) => value.toFixed(0),
   },
 ];
 
-interface Data {
+export interface Data {
   key: number;
   name: string;
-  type: string;
-  start: string;
-  end: string;
-  mark: number;
-  reviews: number;
+  position: string;
+  filial: string,
+  hireDate: string,
+  rating: number,
+  reviews: number
 }
 
 function createData(
-  key: number,
-  name: string,
-  type: string,
-  start: string,
-  end: string,
-  mark: number,
-  reviews: number
+    key: number,
+    name: string,
+    position: string,
+    filial: string,
+    hireDate: string,
+    rating: number,
+    reviews: number
 ): Data {
-  return {key, name, type, start, end, mark, reviews };
+  return {key, name, position, filial, hireDate, rating, reviews};
 }
 
 
-export default function ProjectsTable({tableData}:any) {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+export default function EmployeeAnalyticTable({data}:any) {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const getParambyNumber = (param: number, instance: any) => {
-    return instance.find((value:any) => value.id == param).title
-  }
+  const rows:Data[] = data.map((item:any) => {
+    return(createData(item.key, item.name, item.position, item.filial, item.hireDate, item.rating, item.reviews))
+})
 
-  const getRows = () => {
-    return tableData.map((proj:any, index:any) =>  createData(index, proj.projectName, getParambyNumber(proj.workType, workTypes), proj.dateStart, proj.dateEnd, proj.mark, proj.reviews))
-  }
-  
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -98,7 +88,7 @@ export default function ProjectsTable({tableData}:any) {
 
   return (
     <Paper sx={{ width: '100%' }}>
-      <TableContainer>
+      <TableContainer sx={{ maxHeight: 490 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -114,9 +104,9 @@ export default function ProjectsTable({tableData}:any) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {getRows()
+            {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row:any) => {
+              .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.key}>
                     {columns.map((column) => {
@@ -138,7 +128,7 @@ export default function ProjectsTable({tableData}:any) {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={getRows().length}
+        count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

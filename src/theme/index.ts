@@ -6,8 +6,9 @@ export const DEFAULT_THEME: AllowedTheme = 'dark'
 
 export const lightTheme = createTheme({
     palette: {
-        primary: { main: '#9147FF' },
-        secondary: { main: '#2a48f3' },
+        primary: { main: '#B5B5B5' },
+        secondary: { main: '#DCDCDC' },
+        info: { main: '#FBBF24' },
         mode: 'light',
     },
 })
@@ -25,7 +26,7 @@ export const globalStyles = css`
     :root {
         body {
             background-color: #fff;
-            color: #121212;
+            color: black;
         }
     }
 

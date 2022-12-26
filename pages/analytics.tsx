@@ -3,11 +3,11 @@ import type { NextPage } from "next";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import MainLayout from "../src/components/MainLayout/MainLayout";
-import Administartion from "../src/pages/Administration/Administartion";
+import AnalyticsPage from "../src/pages/Analytics/AnaliticsPage";
 import { userFetched } from "../src/redux/UserSlice";
 import { auth } from "../src/services/firebase";
 
-const Home: NextPage = () => {
+const Analytics: NextPage = () => {
 
     const dispatch = useDispatch();
   
@@ -20,10 +20,10 @@ const Home: NextPage = () => {
     }, [])
 
   return (
-      <MainLayout>
-        <Administartion/>
-      </MainLayout>
+    <MainLayout>
+        <AnalyticsPage/>
+    </MainLayout>
   );
 };
 
-export default Home;
+export default Analytics;

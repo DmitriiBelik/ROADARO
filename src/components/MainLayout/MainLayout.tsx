@@ -10,8 +10,13 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import StyledBox from '../StyledBox/StyledBox'
 import { logout } from '../../services/auth'
+import Router from 'next/router';
+import { useAppSelector } from '../../hooks/redux'
 
 const MainLayout = ({children}: propsLayout) => {
+
+    const {userParams} = useAppSelector<any>(state => state.user)
+    const { projects } = useAppSelector<any>(state => state.projects)
 
     function stringToColor(string: string) {
         let hash = 0;
@@ -46,19 +51,23 @@ const MainLayout = ({children}: propsLayout) => {
         <div>
             <StyledBox className={styles.sidebar_wrapper}>
                 <nav className={styles.sidebar_container}>
-                <div className={styles.person_wrapper}>
-                    <Avatar {...stringAvatar('Белик Дмитрий')} />
-                    <div>
-                        <p>Белик Дмитрий</p>
-                        <p>Руководитель отдела кадров</p>
+                {userParams[0]?.firstName 
+                    ? 
+                    <div className={styles.person_wrapper}>
+                        <Avatar {...stringAvatar(`${userParams[0]?.lastName} ${userParams[0]?.firstName }`)} />
+                        <div>
+                            <p>{userParams[0]?.lastName} {userParams[0]?.firstName }</p>
+                            <p>Руководитель отдела кадров</p>
+                        </div>
                     </div>
-                </div>
-                    <SideBarLink icon={<SourceIcon/>} title='Проекты' count={78}/>
-                    <SideBarLink icon={<AssessmentIcon/>} title='Аналитика'/>
-                    <SideBarLink icon={<HowToRegIcon/>} title='Администрирование'/>
+                    : <div></div>
+                }
+                    <SideBarLink onClick={()=>Router.push('/projects')} icon={<SourceIcon/>} title='Проекты' count={projects.length}/>
+                    <SideBarLink onClick={()=>Router.push('/analytics')} icon={<AssessmentIcon/>} title='Аналитика'/>
+                    <SideBarLink onClick={()=>Router.push('/')} icon={<HowToRegIcon/>} title='Администрирование'/>
                     <Divider/>
                     <p className={styles.opacity}>Учетная запись</p>
-                    <SideBarLink icon={<SettingsIcon/>} title='Настройки'/>
+                    <SideBarLink onClick={()=>Router.push('/settings')} icon={<SettingsIcon/>} title='Настройки'/>
                     <SideBarLink onClick={()=>logout()} icon={<LogoutIcon/>} title='Выйти'/>
                     <ThemeUpdater/>
                 </nav>

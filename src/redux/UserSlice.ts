@@ -4,6 +4,7 @@ import { AppState } from "./Store";
 
 const initialState = {
     userState: {},
+    userParams: {}
 }
 
 export const userSlice = createSlice({
@@ -16,6 +17,9 @@ export const userSlice = createSlice({
         userLogOut:(state) => {
             state.userState = {};
         },
+        userParamsFetched: (state, action) => {
+            state.userParams = action.payload
+        }
     },
     extraReducers: {
         [HYDRATE]: (state, action) => {
@@ -27,7 +31,7 @@ export const userSlice = createSlice({
     }
 });
 
-export const { userFetched, userLogOut } = userSlice.actions;
+export const { userFetched, userLogOut, userParamsFetched } = userSlice.actions;
 
 export const selectAuthState = (state: AppState) => state.user;
 

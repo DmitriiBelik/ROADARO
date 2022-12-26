@@ -6,20 +6,24 @@ import { Formik, Form, Field } from "formik";
 import { TextField } from 'formik-mui';
 import { initialValuesForm, ValidationSchema } from './data';
 import InfoButton from '../../components/InfoButton/InfoButton';
-import { login } from '../../services/auth';
+import { login, getParams } from '../../services/auth';
 import styles from './SignIn.module.scss'
 import Link from 'next/link';
 import Router from 'next/router';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../hooks/redux';
 
-const SignIn = (currentUser:any) => {
+const SignIn = () => {
+    
+    const {userState} = useAppSelector(state => state.user)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if(currentUser?.currentUser?.uid) {
-            Router.push('/')
-        } else {
-            Router.push('/signIn')
+        if(userState){
+            getParams(userState, dispatch)
+            Router.push('/') 
         }
-    }, [currentUser.currentUser])
+    }, [userState])
 
     return(
         <Formik 

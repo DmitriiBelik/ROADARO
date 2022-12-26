@@ -8,19 +8,31 @@ import InfoButton from "../../components/InfoButton/InfoButton";
 import AdministrationTable from "../../components/Tables/AdministrationTable/AdministrationTable";
 import { Bar } from 'react-chartjs-2';
 import Router from 'next/router';
+import { useAppSelector } from "../../hooks/redux";
+import { getParams } from "../../services/auth";
+import { useDispatch } from "react-redux";
 
 
-const Administartion = (currentUser:any) => {
+const Administartion = () => {
     const [value, setValue] = useState<string | null>(options[0]);
     const [inputValue, setInputValue] = useState('');
+    const {userState, userParams} = useAppSelector<any>(state => state.user)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if(currentUser?.currentUser?.uid) {
-            Router.push('/')
-        } else {
-            Router.push('/signIn')
+        userState ? Router.push('/') :  Router.push('/signIn')
+    }, [userState])
+
+    useEffect(() => {
+        getParams(userState, dispatch)
+    }, [userState])
+
+    useEffect(() => {
+        if(Array.isArray(userParams)) {
+            userParams[0]?.firstName ? Router.push('/') : Router.push('/personalInfo')
         }
-    }, [currentUser.currentUser])
+    }, [userParams])
+    
 
     return(
         <div style={{height:'510px'}}>
@@ -50,7 +62,7 @@ const Administartion = (currentUser:any) => {
                         options={Employees.map((option) => option.name)}
                         renderInput={(params) => <TextField {...params} label="Поиск по имени" />}
                     />
-                    <InfoButton style={{marginTop:'5px'}} endIcon={<AddIcon />}>Добавить</InfoButton>
+                    <InfoButton onClick={() => Router.push('/createEmployee')} style={{marginTop:'5px'}} endIcon={<AddIcon />}>Добавить</InfoButton>
             </div>
             <AdministrationTable/>
             </StyledBox>

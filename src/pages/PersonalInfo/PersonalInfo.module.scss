@@ -1,0 +1,43 @@
+.personal_info_wrapper {
+    margin: 0 auto;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.wide_input {
+    width: 600px;
+    margin: 10px 0px;
+}
+
+.fields_wrapper {
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+.radio_wrapper {
+    text-align: start;
+    margin-top: 20px;
+}
+
+.line_input_wrapper_radio {
+    display: flex;
+    justify-content: space-between;
+    text-align: start;
+    margin-top: 20px;
+}
+
+.bottom_block {
+    display: flex;
+    justify-content: space-between;
+    span {
+        line-height: 38.98px;
+
+        a {
+            color: #fbbf24;
+        }
+    }
+}

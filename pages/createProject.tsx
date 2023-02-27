@@ -3,7 +3,6 @@ import type { NextPage } from "next";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import MainLayout from "../src/components/MainLayout/MainLayout";
-import { useAppSelector } from "../src/hooks/redux";
 import CreateProject from "../src/pages/CreateProject/CreateProject";
 import { userFetched } from "../src/redux/UserSlice";
 import { auth } from "../src/services/firebase";
